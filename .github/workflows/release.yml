@@ -1,0 +1,102 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: macos-14
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_15.2.app/Contents/Developer
+      
+      - name: Show Xcode version
+        run: xcodebuild -version
+      
+      - name: Get version from tag
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+      
+      - name: Update version in project
+        run: |
+          # 更新 Info.plist 中的版本号
+          /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${{ steps.get_version.outputs.VERSION }}" ManusPet/Info.plist
+          /usr/libexec/PlistBuddy -c "Set :CFBundleVersion ${{ github.run_number }}" ManusPet/Info.plist
+      
+      - name: Build Release (arm64)
+        run: |
+          xcodebuild archive \
+            -project ManusPet.xcodeproj \
+            -scheme ManusPet \
+            -configuration Release \
+            -destination 'generic/platform=macOS' \
+            -archivePath build/ManusPet-arm64.xcarchive \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            ONLY_ACTIVE_ARCH=NO
+      
+      - name: Export app
+        run: |
+          mkdir -p build/export
+          cp -R build/ManusPet-arm64.xcarchive/Products/Applications/ManusPet.app build/export/
+      
+      - name: Create DMG
+        run: |
+          # 创建临时目录
+          mkdir -p build/dmg-contents
+          cp -R build/export/ManusPet.app build/dmg-contents/
+          
+          # 创建 Applications 链接
+          ln -s /Applications build/dmg-contents/Applications
+          
+          # 创建 DMG
+          hdiutil create -volname "Manus Pet" \
+            -srcfolder build/dmg-contents \
+            -ov -format UDZO \
+            build/ManusPet-${{ steps.get_version.outputs.VERSION }}.dmg
+      
+      - name: Create ZIP
+        run: |
+          cd build/export
+          zip -r ../ManusPet-${{ steps.get_version.outputs.VERSION }}.zip ManusPet.app
+      
+      - name: Generate changelog
+        id: changelog
+        run: |
+          echo "CHANGELOG<<EOF" >> $GITHUB_OUTPUT
+          echo "## What's Changed" >> $GITHUB_OUTPUT
+          echo "" >> $GITHUB_OUTPUT
+          echo "### Features" >> $GITHUB_OUTPUT
+          echo "- Desktop pet with Sprite animation system" >> $GITHUB_OUTPUT
+          echo "- Manus API integration for task monitoring" >> $GITHUB_OUTPUT
+          echo "- Sprite Gallery for browsing and installing custom sprites" >> $GITHUB_OUTPUT
+          echo "- System tray integration" >> $GITHUB_OUTPUT
+          echo "" >> $GITHUB_OUTPUT
+          echo "### Requirements" >> $GITHUB_OUTPUT
+          echo "- macOS 13.0 (Ventura) or later" >> $GITHUB_OUTPUT
+          echo "" >> $GITHUB_OUTPUT
+          echo "**Full Changelog**: https://github.com/${{ github.repository }}/commits/v${{ steps.get_version.outputs.VERSION }}" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+      
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Manus Pet v${{ steps.get_version.outputs.VERSION }}
+          body: ${{ steps.changelog.outputs.CHANGELOG }}
+          draft: false
+          prerelease: false
+          files: |
+            build/ManusPet-${{ steps.get_version.outputs.VERSION }}.dmg
+            build/ManusPet-${{ steps.get_version.outputs.VERSION }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

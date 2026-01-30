@@ -1,0 +1,436 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		/* App */
+		APP001 /* ManusPetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC001; };
+		APP002 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC002; };
+		
+		/* Views */
+		VIEW001 /* PetWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC010; };
+		VIEW002 /* PetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC011; };
+		VIEW003 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC012; };
+		VIEW004 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC013; };
+		VIEW005 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC014; };
+		
+		/* ViewModels */
+		VM001 /* PetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC020; };
+		VM002 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC021; };
+		VM003 /* GalleryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC022; };
+		VM004 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC023; };
+		
+		/* Models */
+		MOD001 /* Sprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC030; };
+		MOD002 /* ManusTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC031; };
+		MOD003 /* PetState.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC032; };
+		MOD004 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC033; };
+		
+		/* Services */
+		SVC001 /* ManusAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC040; };
+		SVC002 /* SpriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC041; };
+		SVC003 /* GalleryAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC042; };
+		SVC004 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC043; };
+		
+		/* Utilities */
+		UTL001 /* SpriteAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC050; };
+		UTL002 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC051; };
+		
+		/* Resources */
+		RES001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = RES_ASSETS; };
+		RES002 /* default_sprite.png in Resources */ = {isa = PBXBuildFile; fileRef = RES_SPRITE; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		/* Product */
+		PROD001 /* ManusPet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ManusPet.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		
+		/* Source Files */
+		SRC001 /* ManusPetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManusPetApp.swift; sourceTree = "<group>"; };
+		SRC002 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		
+		SRC010 /* PetWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetWindow.swift; sourceTree = "<group>"; };
+		SRC011 /* PetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetView.swift; sourceTree = "<group>"; };
+		SRC012 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		SRC013 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
+		SRC014 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
+		
+		SRC020 /* PetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetViewModel.swift; sourceTree = "<group>"; };
+		SRC021 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
+		SRC022 /* GalleryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewModel.swift; sourceTree = "<group>"; };
+		SRC023 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		
+		SRC030 /* Sprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sprite.swift; sourceTree = "<group>"; };
+		SRC031 /* ManusTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManusTask.swift; sourceTree = "<group>"; };
+		SRC032 /* PetState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetState.swift; sourceTree = "<group>"; };
+		SRC033 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		
+		SRC040 /* ManusAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManusAPIService.swift; sourceTree = "<group>"; };
+		SRC041 /* SpriteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteService.swift; sourceTree = "<group>"; };
+		SRC042 /* GalleryAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryAPIService.swift; sourceTree = "<group>"; };
+		SRC043 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		
+		SRC050 /* SpriteAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteAnimator.swift; sourceTree = "<group>"; };
+		SRC051 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		
+		/* Resources */
+		RES_ASSETS /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		RES_SPRITE /* default_sprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_sprite.png; sourceTree = "<group>"; };
+		
+		/* Info.plist */
+		INFO_PLIST /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ENTITLEMENTS /* ManusPet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ManusPet.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		ROOT = {
+			isa = PBXGroup;
+			children = (
+				GRP_MANUSPET,
+				GRP_PRODUCTS,
+			);
+			sourceTree = "<group>";
+		};
+		GRP_PRODUCTS = {
+			isa = PBXGroup;
+			children = (
+				PROD001,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		GRP_MANUSPET = {
+			isa = PBXGroup;
+			children = (
+				GRP_APP,
+				GRP_VIEWS,
+				GRP_VIEWMODELS,
+				GRP_MODELS,
+				GRP_SERVICES,
+				GRP_UTILITIES,
+				GRP_RESOURCES,
+				INFO_PLIST,
+				ENTITLEMENTS,
+			);
+			path = ManusPet;
+			sourceTree = "<group>";
+		};
+		GRP_APP = {
+			isa = PBXGroup;
+			children = (
+				SRC001,
+				SRC002,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		GRP_VIEWS = {
+			isa = PBXGroup;
+			children = (
+				SRC010,
+				SRC011,
+				SRC012,
+				SRC013,
+				SRC014,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		GRP_VIEWMODELS = {
+			isa = PBXGroup;
+			children = (
+				SRC020,
+				SRC021,
+				SRC022,
+				SRC023,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		GRP_MODELS = {
+			isa = PBXGroup;
+			children = (
+				SRC030,
+				SRC031,
+				SRC032,
+				SRC033,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		GRP_SERVICES = {
+			isa = PBXGroup;
+			children = (
+				SRC040,
+				SRC041,
+				SRC042,
+				SRC043,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		GRP_UTILITIES = {
+			isa = PBXGroup;
+			children = (
+				SRC050,
+				SRC051,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		GRP_RESOURCES = {
+			isa = PBXGroup;
+			children = (
+				RES_ASSETS,
+				RES_SPRITE,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		TARGET001 /* ManusPet */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFGLIST_TARGET;
+			buildPhases = (
+				PHASE_SOURCES,
+				PHASE_RESOURCES,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ManusPet;
+			productName = ManusPet;
+			productReference = PROD001;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		PROJECT001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					TARGET001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = CFGLIST_PROJECT;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"zh-Hans",
+			);
+			mainGroup = ROOT;
+			productRefGroup = GRP_PRODUCTS;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				TARGET001,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		PHASE_SOURCES = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				APP001,
+				APP002,
+				VIEW001,
+				VIEW002,
+				VIEW003,
+				VIEW004,
+				VIEW005,
+				VM001,
+				VM002,
+				VM003,
+				VM004,
+				MOD001,
+				MOD002,
+				MOD003,
+				MOD004,
+				SVC001,
+				SVC002,
+				SVC003,
+				SVC004,
+				UTL001,
+				UTL002,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXResourcesBuildPhase section */
+		PHASE_RESOURCES = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				RES001,
+				RES002,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		CFG_DEBUG_PROJECT = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CFG_RELEASE_PROJECT = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		CFG_DEBUG_TARGET = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ManusPet/ManusPet.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ManusPet/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 Manus. All rights reserved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = im.manus.pet;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		CFG_RELEASE_TARGET = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ManusPet/ManusPet.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ManusPet/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 Manus. All rights reserved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = im.manus.pet;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CFGLIST_PROJECT = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFG_DEBUG_PROJECT,
+				CFG_RELEASE_PROJECT,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFGLIST_TARGET = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFG_DEBUG_TARGET,
+				CFG_RELEASE_TARGET,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = PROJECT001;
+}
