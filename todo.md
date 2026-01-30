@@ -62,8 +62,8 @@
 
 ## GitHub CI/CD
 
-- [ ] 创建 GitHub Actions 工作流
-- [ ] 配置自动打 tag
-- [ ] 配置自动构建 macOS 应用
-- [ ] 配置自动发布 Release
-- [ ] 上传到 GitHub 仓库
+- [x] 创建 GitHub Actions 工作流
+- [x] 配置自动打 tag
+- [x] 配置自动构建 macOS 应用
+- [x] 配置自动发布 Release
+- [x] 上传到 GitHub 仓库
