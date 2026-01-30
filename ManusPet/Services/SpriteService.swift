@@ -1,6 +1,5 @@
 import Foundation
 import AppKit
-import ZIPFoundation
 
 // MARK: - Sprite Service
 
@@ -119,7 +118,7 @@ class SpriteService {
         return imagePath.path
     }
     
-    /// 从 ZIP 文件安装精灵
+    /// 从 ZIP 文件安装精灵（使用系统 unzip 命令）
     func installSpriteFromZip(at url: URL) async throws -> Sprite {
         let tempDir = fileManager.temporaryDirectory.appendingPathComponent(UUID().uuidString)
         
@@ -127,9 +126,20 @@ class SpriteService {
             try? fileManager.removeItem(at: tempDir)
         }
         
-        // 解压 ZIP
+        // 创建临时目录
         try fileManager.createDirectory(at: tempDir, withIntermediateDirectories: true)
-        try fileManager.unzipItem(at: url, to: tempDir)
+        
+        // 使用 Process 调用系统 unzip 命令
+        let process = Process()
+        process.executableURL = URL(fileURLWithPath: "/usr/bin/unzip")
+        process.arguments = ["-q", url.path, "-d", tempDir.path]
+        
+        try process.run()
+        process.waitUntilExit()
+        
+        guard process.terminationStatus == 0 else {
+            throw SpriteError.installFailed
+        }
         
         // 读取 manifest
         let manifestURL = tempDir.appendingPathComponent("manifest.json")

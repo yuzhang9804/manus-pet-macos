@@ -71,5 +71,6 @@
 
 ## Bug Fixes
 
-- [ ] 修复缺失的 default_sprite.png 资源文件
-- [ ] 修复缺失的 Assets.xcassets 资源目录
+- [x] 修复缺失的 default_sprite.png 资源文件
+- [x] 修复缺失的 Assets.xcassets 资源目录
+- [ ] 修复缺失的 ZIPFoundation 依赖（添加 Swift Package Manager 配置）
