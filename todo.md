@@ -67,3 +67,9 @@
 - [x] 配置自动构建 macOS 应用
 - [x] 配置自动发布 Release
 - [x] 上传到 GitHub 仓库
+
+
+## Bug Fixes
+
+- [ ] 修复缺失的 default_sprite.png 资源文件
+- [ ] 修复缺失的 Assets.xcassets 资源目录
