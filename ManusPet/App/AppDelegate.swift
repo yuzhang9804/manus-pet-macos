@@ -1,17 +1,18 @@
 import SwiftUI
 import AppKit
 
+@MainActor
 class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: - Properties
     
     var petWindow: PetWindow?
     var statusItem: NSStatusItem?
     
-    // ViewModels
-    let petViewModel = PetViewModel()
-    let taskViewModel = TaskViewModel()
-    let settingsViewModel = SettingsViewModel()
-    let galleryViewModel = GalleryViewModel()
+    // ViewModels - 延迟初始化以避免 MainActor 隔离问题
+    var petViewModel: PetViewModel!
+    var taskViewModel: TaskViewModel!
+    var settingsViewModel: SettingsViewModel!
+    var galleryViewModel: GalleryViewModel!
     
     // Services
     let manusAPIService = ManusAPIService.shared
@@ -23,6 +24,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: - Application Lifecycle
     
     func applicationDidFinishLaunching(_ notification: Notification) {
+        // 初始化 ViewModels
+        petViewModel = PetViewModel()
+        taskViewModel = TaskViewModel()
+        settingsViewModel = SettingsViewModel()
+        galleryViewModel = GalleryViewModel()
+        
         // 设置菜单栏图标
         setupStatusItem()
         
@@ -43,7 +50,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         stopTaskPolling()
     }
     
-    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+    nonisolated func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         return false // 关闭窗口不退出应用
     }
     
@@ -99,7 +106,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let spriteId = UserDefaults.standard.string(forKey: Constants.UserDefaultsKeys.currentSpriteId) {
             spriteService.loadSprite(id: spriteId) { [weak self] sprite in
                 if let sprite = sprite {
-                    self?.petViewModel.currentSprite = sprite
+                    Task { @MainActor in
+                        self?.petViewModel.currentSprite = sprite
+                    }
                 }
             }
         } else {
@@ -133,7 +142,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // 每 5 秒轮询一次
         taskPollingTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { [weak self] _ in
-            self?.pollTasks()
+            Task { @MainActor in
+                self?.pollTasks()
+            }
         }
         
         // 立即执行一次
@@ -149,10 +160,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         Task {
             do {
                 let tasks = try await manusAPIService.listTasks()
-                await MainActor.run {
-                    self.taskViewModel.updateTasks(tasks)
-                    self.updatePetStateBasedOnTasks(tasks)
-                }
+                self.taskViewModel.updateTasks(tasks)
+                self.updatePetStateBasedOnTasks(tasks)
             } catch {
                 print("Failed to poll tasks: \(error)")
             }
