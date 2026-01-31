@@ -3,6 +3,7 @@ import Combine
 
 // MARK: - Gallery ViewModel
 
+@MainActor
 class GalleryViewModel: ObservableObject {
     // MARK: - Published Properties
     
@@ -46,8 +47,9 @@ class GalleryViewModel: ObservableObject {
         $selectedCategory
             .dropFirst()
             .sink { [weak self] category in
-                Task {
-                    await self?.fetchSprites(category: category)
+                guard let self = self else { return }
+                Task { @MainActor in
+                    await self.fetchSprites(category: category)
                 }
             }
             .store(in: &cancellables)
@@ -56,22 +58,16 @@ class GalleryViewModel: ObservableObject {
     // MARK: - Public Methods
     
     func fetchSprites(category: SpriteCategory = .popular) async {
-        await MainActor.run {
-            isLoading = true
-            errorMessage = nil
-        }
+        isLoading = true
+        errorMessage = nil
         
         do {
             let fetchedSprites = try await galleryService.fetchSprites(category: category)
-            await MainActor.run {
-                sprites = fetchedSprites
-                isLoading = false
-            }
+            sprites = fetchedSprites
+            isLoading = false
         } catch {
-            await MainActor.run {
-                errorMessage = error.localizedDescription
-                isLoading = false
-            }
+            errorMessage = error.localizedDescription
+            isLoading = false
         }
     }
     
@@ -79,13 +75,11 @@ class GalleryViewModel: ObservableObject {
         // 下载精灵包
         let localPath = try await spriteService.downloadSprite(sprite)
         
-        await MainActor.run {
-            installedSpriteIds.insert(sprite.id)
-            saveInstalledSprites()
-        }
+        installedSpriteIds.insert(sprite.id)
+        saveInstalledSprites()
         
         // 通知精灵变化
-        var installedSprite = sprite
+        let installedSprite = sprite
         // 更新本地路径
         NotificationCenter.default.post(
             name: .spriteDidChange,
@@ -108,12 +102,10 @@ class GalleryViewModel: ObservableObject {
         try await galleryService.likeSprite(spriteId)
         
         // 更新本地数据
-        await MainActor.run {
-            if let index = sprites.firstIndex(where: { $0.id == spriteId }) {
-                var sprite = sprites[index]
-                sprite.likes = (sprite.likes ?? 0) + 1
-                sprites[index] = sprite
-            }
+        if let index = sprites.firstIndex(where: { $0.id == spriteId }) {
+            var sprite = sprites[index]
+            sprite.likes = (sprite.likes ?? 0) + 1
+            sprites[index] = sprite
         }
     }
     
